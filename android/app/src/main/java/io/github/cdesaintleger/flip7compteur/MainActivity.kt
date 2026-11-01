@@ -175,17 +175,14 @@ private fun WebField(value: String, placeholder: String, modifier: Modifier, num
     // Keep input synchronous for the keyboard while DataStore saves asynchronously.
     var input by remember { mutableStateOf(value) }
     var focused by remember { mutableStateOf(false) }
-    var pending by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(value, focused) {
-        if(!focused && (pending == null || value == pending)) {
+        if(!focused) {
             input = value
-            pending = null
         }
     }
     BasicTextField(input, { next ->
         val valid = if(numeric) next.filter(Char::isDigit).take(4) else next.take(24)
         input = valid
-        pending = valid
         onChange(valid)
     }, modifier.onFocusChanged { focused = it.isFocused }.height(48.dp).background(Color(0xFFFFF8E3), RoundedCornerShape(4.dp)).border(1.dp, Ink, RoundedCornerShape(4.dp)).padding(horizontal = 12.dp), singleLine = true,
         textStyle = TextStyle(color = Ink, fontSize = 16.sp, textAlign = if(numeric) TextAlign.Center else TextAlign.Start), keyboardOptions = KeyboardOptions(keyboardType = if(numeric) KeyboardType.Number else KeyboardType.Text),
