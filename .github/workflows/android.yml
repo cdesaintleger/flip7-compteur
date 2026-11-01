@@ -28,6 +28,8 @@ jobs:
           packages: 'platform-tools platforms;android-36 build-tools;35.0.0'
           log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
       - run: ./gradlew --no-daemon testDebugUnitTest lintDebug assembleDebug bundleRelease
       - uses: actions/upload-artifact@v4
         with:
@@ -61,6 +63,8 @@ jobs:
           packages: 'platform-tools platforms;android-36 build-tools;35.0.0'
           log-accepted-android-sdk-licenses: false
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
       - name: Activer KVM
         run: sudo chmod 666 /dev/kvm
       - uses: reactivecircus/android-emulator-runner@v2
@@ -70,10 +74,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           working-directory: android
-          script: ./gradlew --no-daemon connectedDebugAndroidTest
-      - name: Récupérer les captures
-        if: always()
-        run: adb pull /sdcard/Android/data/io.github.cdesaintleger.flip7compteur/files/screenshots ../outputs/android-screenshots || true
+          script: ./gradlew --no-daemon connectedDebugAndroidTest; native_test_result=$?; adb pull /sdcard/Android/data/io.github.cdesaintleger.flip7compteur/files/screenshots ../outputs/android-screenshots || true; exit "$native_test_result"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.lifecycle.ViewModelProvider
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
@@ -11,12 +12,16 @@ import java.io.File
 class NativeFlowTest {
     @get:Rule val ui = createAndroidComposeRule<MainActivity>()
     private fun tap(tag: String, list: String = "game-list") {
+        ui.waitUntil(15_000) { ui.onAllNodesWithTag(list).fetchSemanticsNodes().isNotEmpty() }
         ui.onNodeWithTag(list).performScrollToNode(hasTestTag(tag))
+        val vm = ViewModelProvider(ui.activity)[GameViewModel::class.java]
+        val before = vm.state.value
         ui.onNodeWithTag(tag, useUnmergedTree = true).performClick()
+        ui.waitUntil(15_000) { vm.state.value != before }
         ui.waitForIdle()
     }
     private fun score(index: Int, value: Int) {
-        ui.onNodeWithTag("game-list").performScrollToNode(hasTestTag("score-$index"))
+        ui.onNodeWithTag("game-list").performScrollToNode(hasTestTag("player-$index"))
         ui.onNodeWithTag("score-$index", useUnmergedTree = true).assertTextEquals("$value pts")
     }
     private fun capture(name: String) {
