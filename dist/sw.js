@@ -1,4 +1,4 @@
-const CACHE='flip7-v5-full-cards-1';
+const CACHE='flip7-v6-classic';
 const FILES=['./','./index.html','./style.css','./theme.css',...['0','1','2','3','4','5','6','7','8','9','10','11','12','13','unlucky7','lucky13','minus2','minus4','minus6','minus8','minus10','half'].map(id=>'./assets/cards/'+id+'.png'),'./app.js','./scoring.mjs','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png','./icon-maskable.png','./manifest.webmanifest'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('flip7-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

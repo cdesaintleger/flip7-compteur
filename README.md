@@ -108,3 +108,9 @@ Pour une nouvelle version de l’application, incrémentez le nom du cache dans 
 Compteur indépendant, sans affiliation avec les éditeurs du jeu. Flip 7, ses illustrations et ses visuels appartiennent à leurs ayants droit.
 
 Les cartes sont rendues individuellement à partir des groupes vectoriels du [livret officiel français de Flip 7 Vengeance](https://flip-7.com/wp-content/uploads/2026/10/flip7_vengeance_regles_fr.pdf), puis intégrées localement pour le mode hors connexion. Consultez les [règles et informations officielles](https://flip-7.com/flip7-vengeance/).
+
+## Choix de l’édition
+
+À la création d’une partie, les boutons **Flip 7 Classique / Flip 7 Vengeance** sélectionnent les cartes et les règles. Pour changer d’édition, utilisez « Nouvelle partie » (la partie courante sera remplacée après confirmation). L’édition reste enregistrée avec la partie et ses corrections. Les anciennes sauvegardes restent en Vengeance.
+
+En classique : numéros 0 à 12 ; ×2 sur les numéros uniquement ; bonus +2, +4, +6, +8, +10 puis +15 pour sept numéros. Le zéro ne supprime pas les autres points. Sauté = 0. Le mode Sans pitié est réservé à Vengeance. [FAQ de l’éditeur](https://catchupgames.com/flip-7-faq/).
