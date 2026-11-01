@@ -387,9 +387,9 @@ private fun CardGrid(ids: List<String>, hand: Hand, columns: Int, vm: GameViewMo
                                 Image(painterResource(cardResource(id)), null, Modifier.width(84.dp).height(117.dp), contentScale = ContentScale.Fit)
                                 Text(cardLabel(id), fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             } else if(id in bonusIds) Column(Modifier.fillMaxSize().background(Color(0xFFF8D688)).border(3.dp, Ink, RoundedCornerShape(5.dp)).padding(7.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceEvenly) {
-                                Text("BONUS", fontSize = 9.sp, fontWeight = FontWeight.Bold)
-                                Text(if(id == "double") "×2" else "+${id.removePrefix("plus")}", fontSize = 30.sp, fontWeight = FontWeight.Black)
-                                Text("FLIP 7", fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                Text("BONUS", color = Ink, fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                Text(if(id == "double") "×2" else "+${id.removePrefix("plus")}", color = Ink, fontSize = 30.sp, fontWeight = FontWeight.Black)
+                                Text("FLIP 7", color = Ink, fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             } else Image(painterResource(cardResource(id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
                             Text(if(picked) "✓" else "+", Modifier.align(Alignment.BottomEnd).background(if(picked) Ink else Paper, RoundedCornerShape(3.dp)).border(.7.dp, Ink, RoundedCornerShape(3.dp)).padding(horizontal = 3.dp), color = if(picked) Yellow else Ink, fontWeight = FontWeight.Bold, fontSize = 11.sp)
                         }
