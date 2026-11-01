@@ -30,3 +30,5 @@ Le service worker précharge tous les fichiers locaux et les icônes PNG. Aucune
 Règles : https://flip-7.com/flip7-vengeance/ . Compteur indépendant, sans affiliation avec les éditeurs.
 
 Visuels des cartes provenant des ressources officielles de Catch Up Games : https://flip-7.com/flip7-vengeance/ . Ils sont embarqués localement et préchargés pour le mode hors connexion.
+
+Les 22 visuels individuels complets sont rendus à partir des groupes vectoriels du livret officiel français (page 3) : https://flip-7.com/wp-content/uploads/2026/10/flip7_vengeance_regles_fr.pdf . Aucun visuel n’est découpé depuis un éventail de cartes.
