@@ -1,4 +1,4 @@
-# Application Android native — 0.1.0
+# Application Android native — 0.1.1
 
 Première version Android de **Flip 7 · Le compteur**, développée en Kotlin avec Jetpack Compose. Interface, calculs et stockage sont natifs. Les 22 cartes sont incluses dans l’APK et l’application fonctionne hors connexion dès son installation.
 

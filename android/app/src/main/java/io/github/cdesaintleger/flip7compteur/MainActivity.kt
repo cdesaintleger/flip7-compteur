@@ -353,10 +353,13 @@ private fun CardGrid(ids: List<String>, hand: Hand, columns: Int, vm: GameViewMo
             Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                 row.forEach { id ->
                     val picked = id in hand.cards
-                    Surface(Modifier.weight(1f).selectable(picked, role = Role.Checkbox, onClick = { vm.changeHand { Scoring.toggle(it, id) } }).semantics { contentDescription = cardLabel(id) }.testTag("card-$id"), shape = RoundedCornerShape(5.dp), color = if(picked) Yellow else Color.Transparent, border = if(picked) BorderStroke(3.dp, Teal) else null) {
-                        Box(Modifier.padding(if(picked) 3.dp else 0.dp).then(if(special) Modifier.height(144.dp) else Modifier.aspectRatio(304f / 422f))) {
-                            Image(painterResource(cardResource(id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
-                            if(picked) Text("✓", Modifier.align(Alignment.BottomEnd).background(Ink, RoundedCornerShape(3.dp)).padding(horizontal = 4.dp), color = Yellow, fontWeight = FontWeight.Bold)
+                    Surface(Modifier.weight(1f).selectable(picked, role = Role.Checkbox, onClick = { vm.changeHand { Scoring.toggle(it, id) } }).semantics { contentDescription = cardLabel(id) }.testTag("card-$id"), shape = RoundedCornerShape(5.dp), color = if(picked) Yellow else if(special) Color(0xFFFFF5D6) else Color.Transparent, border = if(picked) BorderStroke(3.dp, Teal) else if(special) BorderStroke(1.dp, Color(0xFFABA1A2)) else null) {
+                        Box(Modifier.padding(if(picked) 3.dp else 0.dp).then(if(special) Modifier.height(151.dp) else Modifier.aspectRatio(304f / 422f))) {
+                            if(special) Column(Modifier.fillMaxSize().padding(top = 7.dp, bottom = 5.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
+                                Image(painterResource(cardResource(id)), null, Modifier.width(84.dp).height(117.dp), contentScale = ContentScale.Fit)
+                                Text(cardLabel(id), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                            } else Image(painterResource(cardResource(id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
+                            Text(if(picked) "✓" else "+", Modifier.align(Alignment.BottomEnd).background(if(picked) Ink else Paper, RoundedCornerShape(3.dp)).border(.7.dp, Ink, RoundedCornerShape(3.dp)).padding(horizontal = 3.dp), color = if(picked) Yellow else Ink, fontWeight = FontWeight.Bold, fontSize = 11.sp)
                         }
                     }
                 }
