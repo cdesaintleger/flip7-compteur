@@ -61,6 +61,10 @@ Les données restent dans le stockage local de ce navigateur, sur cet appareil. 
 
 **Les sauvegardes de l’ancienne adresse Sites ne sont pas transférées vers GitHub Pages**, car chaque adresse possède son propre stockage. Selon le navigateur, l’application installée peut également disposer d’un stockage distinct.
 
+## Application Android native
+
+Une première application Kotlin / Jetpack Compose se trouve dans [android/](android/README.md). Elle embarque les cartes et fonctionne hors connexion dès l’installation. Le workflow **Android natif** produit un APK de test et un bundle de préparation non signé, sans modifier le site GitHub Pages.
+
 ## Développement
 
 L’application est statique : HTML, CSS et JavaScript natif, sans dépendance de production ni étape de compilation.

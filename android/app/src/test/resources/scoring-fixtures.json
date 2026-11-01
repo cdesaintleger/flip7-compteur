@@ -1,0 +1,2614 @@
+[
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "minus6",
+          "minus10",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -7,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "5",
+          "minus2"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      9,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "unlucky7",
+          "1",
+          "8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      6,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "12",
+          "9",
+          "5",
+          "10",
+          "minus6",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      15,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "3",
+          "9",
+          "5",
+          "13",
+          "minus4"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -4,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "unlucky7",
+          "13",
+          "6",
+          "2",
+          "5",
+          "lucky13",
+          "minus2",
+          "minus4",
+          "minus10",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      30,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "11",
+          "0",
+          "5",
+          "4",
+          "3",
+          "13",
+          "half"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      18,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus4",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "3",
+          "minus2",
+          "minus6",
+          "minus10"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -18,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "0",
+          "minus6",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "13",
+          "7",
+          "12"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      32,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "10",
+          "1",
+          "4",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      11,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "4",
+          "11",
+          "9",
+          "1",
+          "8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      33,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "3",
+          "2",
+          "1",
+          "13",
+          "4",
+          "0"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "0",
+          "unlucky7",
+          "3",
+          "12",
+          "2",
+          "1",
+          "minus2",
+          "minus4",
+          "minus6",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      26,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus2",
+          "minus4",
+          "minus6",
+          "minus10",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "minus2",
+          "minus4",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -6,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "unlucky7",
+          "minus2"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "8",
+          "12",
+          "minus2",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      9,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "11",
+          "3",
+          "8",
+          "0",
+          "minus4",
+          "minus6",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "13",
+          "3",
+          "unlucky7",
+          "5",
+          "2",
+          "lucky13",
+          "minus4",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      21,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "4",
+          "3",
+          "12",
+          "5",
+          "7",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      19,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "12",
+          "11",
+          "0",
+          "4",
+          "9",
+          "3"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      45,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus6",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "10",
+          "minus2",
+          "minus8",
+          "minus10",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -5,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "12",
+          "minus2",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "9",
+          "11",
+          "minus8"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -8,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "11",
+          "5",
+          "7",
+          "8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      31,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "10",
+          "13",
+          "3",
+          "4",
+          "7",
+          "minus6",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      23,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "9",
+          "12",
+          "unlucky7",
+          "4",
+          "8",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      40,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "4",
+          "6",
+          "3",
+          "8",
+          "2",
+          "1",
+          "minus6"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      23,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus4",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "11",
+          "minus2",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -1,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "6",
+          "minus2"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      9,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "12",
+          "9",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      16,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "11",
+          "3",
+          "0",
+          "10",
+          "minus2",
+          "minus4",
+          "minus6",
+          "minus8",
+          "half"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "3",
+          "8",
+          "1",
+          "9",
+          "6",
+          "minus2",
+          "minus4",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      15,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "4",
+          "3",
+          "7",
+          "12",
+          "11",
+          "5",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      21,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "unlucky7",
+          "13",
+          "9",
+          "3",
+          "8",
+          "2",
+          "11",
+          "minus6",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      52,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus4",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "unlucky7",
+          "4",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      3,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "9",
+          "13"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      23,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "3",
+          "6",
+          "13",
+          "12",
+          "minus6",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      18,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "12",
+          "6",
+          "10",
+          "8",
+          "9",
+          "minus6"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -6,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "7",
+          "6",
+          "11",
+          "4",
+          "12",
+          "9",
+          "minus2",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      29,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "3",
+          "13",
+          "8",
+          "5",
+          "10",
+          "4",
+          "minus2",
+          "minus4",
+          "minus6",
+          "minus10"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      22,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus2"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "7",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -3,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "3",
+          "minus4",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "4",
+          "11",
+          "0",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "10",
+          "1",
+          "8",
+          "12",
+          "minus2",
+          "minus4",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      12,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "1",
+          "5",
+          "2",
+          "7",
+          "minus2",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -12,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "11",
+          "4",
+          "0",
+          "1",
+          "8",
+          "minus4"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "8",
+          "3",
+          "11",
+          "6",
+          "12",
+          "4",
+          "5",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      31,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "3",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -5,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "4",
+          "6",
+          "minus2",
+          "minus4",
+          "minus6",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "13",
+          "0",
+          "11",
+          "minus4",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -22,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "8",
+          "5",
+          "3",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "4",
+          "1",
+          "5",
+          "8",
+          "3",
+          "minus2",
+          "minus4"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      15,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "11",
+          "2",
+          "8",
+          "10",
+          "9",
+          "1"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      41,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "unlucky7",
+          "13",
+          "6",
+          "9",
+          "12",
+          "2",
+          "0"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus2",
+          "minus6",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "minus4",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -5,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "unlucky7",
+          "8",
+          "minus6",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      1,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "0",
+          "3",
+          "minus4",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -2,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "7",
+          "13",
+          "3",
+          "minus2"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      23,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "3",
+          "11",
+          "10",
+          "9",
+          "minus4",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -2,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "0",
+          "8",
+          "3",
+          "12",
+          "4"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "1",
+          "0",
+          "2",
+          "11",
+          "7",
+          "5",
+          "8",
+          "minus8"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      26,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus6",
+          "minus10"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "13",
+          "minus4",
+          "minus8",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "12"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      17,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "11",
+          "13",
+          "lucky13",
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -8,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "8",
+          "3",
+          "6",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      12,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "13",
+          "8",
+          "0",
+          "10",
+          "9",
+          "minus2",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -8,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "12",
+          "unlucky7",
+          "11",
+          "1",
+          "10",
+          "0",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "11"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      26,
+      -15
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus8"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "minus2",
+          "minus4",
+          "minus10"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -16,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "2",
+          "minus4",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "2",
+          "6",
+          "10",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      9,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "6",
+          "11",
+          "13",
+          "0",
+          "lucky13",
+          "minus4",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "11",
+          "5",
+          "9",
+          "1",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -10,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "12",
+          "0",
+          "6",
+          "13",
+          "1",
+          "8",
+          "minus6",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "2",
+          "0",
+          "13",
+          "unlucky7",
+          "11",
+          "8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      55,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "minus8",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "minus6"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -1,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "9",
+          "2",
+          "minus2"
+        ],
+        "bust": true,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "0",
+          "2",
+          "7",
+          "minus2",
+          "minus8",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      -20,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "7",
+          "5",
+          "1",
+          "6",
+          "minus6",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      6,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "5",
+          "3",
+          "2",
+          "12",
+          "unlucky7",
+          "half"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      14,
+      0
+    ]
+  },
+  {
+    "mode": "standard",
+    "hands": [
+      {
+        "cards": [
+          "12",
+          "9",
+          "7",
+          "2",
+          "13",
+          "1",
+          "minus10"
+        ],
+        "bust": false,
+        "target": null,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      34,
+      0
+    ]
+  },
+  {
+    "mode": "brutal",
+    "hands": [
+      {
+        "cards": [
+          "7",
+          "1",
+          "0",
+          "2",
+          "5",
+          "8",
+          "13",
+          "minus6",
+          "minus10",
+          "half"
+        ],
+        "bust": false,
+        "target": 1,
+        "manual": null
+      },
+      {
+        "cards": [],
+        "bust": false,
+        "target": null,
+        "manual": null
+      }
+    ],
+    "expected": [
+      10,
+      -15
+    ]
+  }
+]
