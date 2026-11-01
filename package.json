@@ -1,0 +1,11 @@
+{
+  "name": "flip7-compteur",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Compteur de points Flip 7 Vengeance, installable et utilisable hors connexion.",
+  "type": "module",
+  "scripts": {
+    "test": "node --check dist/app.js && node --check dist/sw.js && node tests/scoring.mjs && node tests/offline-assets.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
