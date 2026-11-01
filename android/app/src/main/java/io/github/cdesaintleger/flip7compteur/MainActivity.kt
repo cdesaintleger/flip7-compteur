@@ -13,6 +13,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,6 +41,7 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -57,7 +59,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Ink.toArgb()), navigationBarStyle = SystemBarStyle.dark(Ink.toArgb()))
         setContent {
-            MaterialTheme(colorScheme = lightColorScheme(primary = Ink, onPrimary = Paper, secondary = Yellow, surface = Paper, onSurface = Ink, background = Ink)) {
+            MaterialTheme(typography = Typography(bodyLarge = TextStyle(fontSize = 16.sp, lineHeight = 1.25.em)), colorScheme = lightColorScheme(primary = Ink, onPrimary = Paper, secondary = Yellow, surface = Paper, onSurface = Ink, background = Ink)) {
                 FlipApp(viewModel())
             }
         }
@@ -170,7 +172,7 @@ private fun Avatar(name: String, index: Int) {
 @Composable
 private fun WebField(value: String, placeholder: String, modifier: Modifier, numeric: Boolean = false, onChange: (String) -> Unit) {
     BasicTextField(value, onChange, modifier.height(48.dp).background(Color(0xFFFFF8E3), RoundedCornerShape(4.dp)).border(1.dp, Ink, RoundedCornerShape(4.dp)).padding(horizontal = 12.dp), singleLine = true,
-        textStyle = TextStyle(color = Ink, fontSize = 16.sp), keyboardOptions = KeyboardOptions(keyboardType = if(numeric) KeyboardType.Number else KeyboardType.Text),
+        textStyle = TextStyle(color = Ink, fontSize = 16.sp, textAlign = if(numeric) TextAlign.Center else TextAlign.Start), keyboardOptions = KeyboardOptions(keyboardType = if(numeric) KeyboardType.Number else KeyboardType.Text),
         decorationBox = { inner -> Box(Modifier.fillMaxSize(), contentAlignment = if(numeric) Alignment.Center else Alignment.CenterStart) { if(value.isEmpty()) Text(placeholder, color = Muted, fontSize = 16.sp); inner() } })
 }
 @Composable
