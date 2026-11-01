@@ -1,2 +1,12 @@
 outputs/
 .DS_Store
+# Android
+android/.gradle/
+android/.kotlin/
+android/**/build/
+android/local.properties
+android/captures/
+*.jks
+*.keystore
+keystore.properties
+.idea/
