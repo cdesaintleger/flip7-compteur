@@ -12,7 +12,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.background
@@ -74,8 +73,12 @@ private fun FlipApp(vm: GameViewModel) {
     var confirm by rememberSaveable { mutableStateOf<String?>(null) }
     LaunchedEffect(message) { message?.let { snackbar.showSnackbar(it); vm.message.value = null } }
     BackHandler(enabled = state?.selected != null) { vm.update { it.copy(selected = null) } }
-    Box(Modifier.fillMaxSize().drawWithCache { val gradient = Brush.radialGradient(listOf(Color(0xFF28A7B9), Color(0xFF147B9C), Ink), center = Offset(size.width / 2, size.height * .13f), radius = size.height * .9f); onDrawBehind { drawRect(gradient) } }.safeDrawingPadding()) {
-        Column(Modifier.fillMaxSize()) {
+    Box(Modifier.fillMaxSize().background(Ink).safeDrawingPadding()) {
+        Column(Modifier.fillMaxSize().drawWithCache {
+            val horizontal = Brush.horizontalGradient(listOf(Ink, Color(0xFF28A7B9), Ink))
+            val vertical = Brush.verticalGradient(0f to Color.Transparent, .35f to Color.Transparent, 1f to Ink)
+            onDrawBehind { drawRect(horizontal); drawRect(vertical) }
+        }) {
             Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp)) {
                 Row(Modifier.fillMaxWidth().height(66.dp), verticalAlignment = Alignment.CenterVertically) {
                     Image(painterResource(R.drawable.brand_web), "Flip 7 · Vengeance · Scores", Modifier.width(152.dp).height(58.dp), contentScale = ContentScale.Fit)
