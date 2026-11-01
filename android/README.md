@@ -1,13 +1,12 @@
 # Application Android native — 0.2.0
 
-Première version Android de **Flip 7 · Le compteur**, développée en Kotlin avec Jetpack Compose. Interface, calculs et stockage sont natifs. Les 22 cartes sont incluses dans l’APK et l’application fonctionne hors connexion dès son installation.
+Application Android de **Flip 7 · Le compteur**, compatible Classique et Vengeance, développée en Kotlin avec Jetpack Compose. Interface, calculs et stockage sont natifs. Les 22 cartes sont incluses dans l’APK et l’application fonctionne hors connexion dès son installation.
 
 ## Fonctionnalités
 
 - Sélecteur Classique / Vengeance avant de commencer, édition conservée dans les sauvegardes.
 - Classique : numéros 0–12, bonus +2 à +10 et ×2, zéro ordinaire, Flip 7 +15.
-
-- Création de partie de 1 à 18 joueurs, objectif configurable et mode Sans pitié.
+- Création de partie de 1 à 18 joueurs, objectif configurable et mode Sans pitié pour Vengeance.
 - Sélection tactile des cartes finales et score immédiat ; joueurs non saisis à zéro.
 - Bonus Flip 7, zéro, 13 porte-bonheur, malus et ÷2 selon l’ordre du livret français.
 - Classement, égalités, victoire, revanche et historique.
@@ -17,6 +16,12 @@ Première version Android de **Flip 7 · Le compteur**, développée en Kotlin a
 - Mise en page adaptable, marges système et commandes accessibles Android.
 
 Aucune permission réseau, publicité, télémétrie ou connexion à un compte n’est demandée. Les données restent dans le stockage interne de l’application. La sauvegarde Android dans le cloud est désactivée. Les parties de la PWA ne sont pas importées automatiquement.
+
+## Installer la version de test
+
+[APK Android 0.2.0](https://github.com/cdesaintleger/flip7-compteur/releases/download/v0.2.0-android/flip7-compteur-android-0.2.0-debug.apk) · [Notes et captures](https://github.com/cdesaintleger/flip7-compteur/releases/tag/v0.2.0-android)
+
+La signature diffère de celle de la version 0.1.1. Désinstallez l’ancienne application avant d’installer celle-ci ; **la désinstallation efface la partie locale**. Terminez la partie ou notez ses scores au préalable. Une mise à jour par `adb install -r` nécessite une signature identique.
 
 ## Compiler
 
@@ -43,7 +48,7 @@ Le workflow **Android natif** compile le projet, lance les tests unitaires et li
 - **flip7-android-release-unsigned** : Android App Bundle non signé, pour préparer la distribution.
 - Les rapports de test, de lint et les captures du parcours sur émulateur Android.
 
-Les artefacts se téléchargent depuis l’exécution du workflow. L’émulateur API 35 teste la saisie, la correction, la recréation de l’activité et le mode Sans pitié. Les 96 fixtures dans `app/src/test/resources/scoring-fixtures.json` proviennent du moteur de la version web ; elles vérifient la cohérence de la version Kotlin.
+Les artefacts se téléchargent depuis l’exécution du workflow. L’émulateur API 35 teste la saisie, la correction, la recréation de l’activité et les deux éditions, dont le mode Sans pitié de Vengeance. Les 10 tests unitaires incluent les règles classiques et la sauvegarde de l’édition. Les 96 fixtures dans `app/src/test/resources/scoring-fixtures.json` proviennent du moteur de la version web ; elles vérifient la cohérence de la version Kotlin.
 
 ## Structure
 

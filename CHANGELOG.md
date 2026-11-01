@@ -1,5 +1,15 @@
 # Historique des versions
 
+## Android 0.2.0 et mise à jour web — 1 novembre 2026
+
+- Choix Classique / Vengeance à la création de partie, conservé avec les scores et corrections.
+- Classique : numéros 0 à 12, bonus +2 à +10 et ×2 ; zéro ordinaire et Flip 7 +15.
+- Mode Sans pitié réservé à Vengeance ; anciennes sauvegardes conservées comme Vengeance.
+- Application native Kotlin / Jetpack Compose, stockage DataStore et ressources hors connexion.
+- Interface native alignée sur la webapp, logo et icône complets, bandeau adapté à l’édition.
+- Tests unitaires, parcours Android et vérifications web des deux éditions.
+- APK de test 0.2.0 avec une signature différente de 0.1.1 : désinstallation préalable nécessaire, supprimant la sauvegarde native.
+
 ## 1.0.0 — 1 novembre 2026
 
 Première version publiée sur GitHub et GitHub Pages.
