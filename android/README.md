@@ -1,8 +1,11 @@
-# Application Android native — 0.1.1
+# Application Android native — 0.2.0
 
 Première version Android de **Flip 7 · Le compteur**, développée en Kotlin avec Jetpack Compose. Interface, calculs et stockage sont natifs. Les 22 cartes sont incluses dans l’APK et l’application fonctionne hors connexion dès son installation.
 
 ## Fonctionnalités
+
+- Sélecteur Classique / Vengeance avant de commencer, édition conservée dans les sauvegardes.
+- Classique : numéros 0–12, bonus +2 à +10 et ×2, zéro ordinaire, Flip 7 +15.
 
 - Création de partie de 1 à 18 joueurs, objectif configurable et mode Sans pitié.
 - Sélection tactile des cartes finales et score immédiat ; joueurs non saisis à zéro.

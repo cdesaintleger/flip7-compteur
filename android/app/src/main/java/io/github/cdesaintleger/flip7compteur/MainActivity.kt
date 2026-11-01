@@ -84,10 +84,8 @@ private fun FlipApp(vm: GameViewModel) {
         }) {
             Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp)) {
                 Row(Modifier.fillMaxWidth().height(66.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.width(152.dp).height(58.dp)) {
-                    Image(painterResource(R.drawable.brand_web), "Flip 7 · Vengeance · Scores", Modifier.width(152.dp).height(58.dp), contentScale = ContentScale.Fit)
-                    if(state?.game?.classic ?: (state?.setup?.classic == true)) Text("CLASSIQUE · SCORES", Modifier.align(Alignment.BottomEnd).padding(bottom = 6.dp).background(Paper).padding(horizontal = 5.dp, vertical = 2.dp), color = Ink, fontSize = 7.sp, fontWeight = FontWeight.Bold)
-                    }
+                    val classic = state?.game?.classic ?: (state?.setup?.classic == true)
+                    Image(painterResource(if(classic) R.drawable.brand_classic else R.drawable.brand_web), if(classic) "Flip 7 · Classique · Scores" else "Flip 7 · Vengeance · Scores", Modifier.width(152.dp).height(58.dp), contentScale = ContentScale.Fit)
                     Spacer(Modifier.weight(1f))
                     Box(Modifier.size(33.dp)) {
                     Box(Modifier.offset(2.dp, 3.dp).size(33.dp).background(Ink, RoundedCornerShape(5.dp)))
@@ -115,7 +113,7 @@ private fun FlipApp(vm: GameViewModel) {
             item { Text("Sélectionnez les cartes finales de chaque joueur. Aucune sélection = 0 point. Une seule validation termine la manche.") }
             item { Text("Classique : numéros de 0 à 12, ×2 sur les numéros seulement, puis Bonus et +15 pour sept numéros. Le zéro laisse les autres points intacts. Sauté = 0.") }
             item { Text("Vengeance : calcul du livret français : numéros − malus, minimum zéro en mode normal, puis ÷2 arrondi à l’inférieur, et enfin bonus Flip 7 de 15 points.") }
-            item { Text("Le zéro impose 0 sans Flip 7. Le 13 porte-bonheur autorise deux 13 qui comptent tous deux pour le bonus. Résolvez les actions autour de la table avant la saisie.") }
+            item { Text("Dans Vengeance, le zéro impose 0 sans Flip 7. Le 13 porte-bonheur autorise deux 13 qui comptent tous deux pour le bonus. Résolvez les actions autour de la table avant la saisie.") }
             item { Text("Sans pitié : scores négatifs et malus sur un joueur ayant sauté. À sept cartes, choisissez +15 points ou −15 pour un adversaire.") }
             item { Text("La sauvegarde est automatique sur cet appareil. Vous pouvez quitter l’application, tourner l’écran et corriger une manche depuis l’historique. Tout fonctionne sans Internet, dès l’installation.") }
             item { Text("Compteur indépendant, sans affiliation avec les éditeurs. Les illustrations des cartes appartiennent à leurs ayants droit.", fontSize = 12.sp) }
