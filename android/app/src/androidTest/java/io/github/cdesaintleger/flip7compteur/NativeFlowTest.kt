@@ -1,6 +1,8 @@
 package io.github.cdesaintleger.flip7compteur
 
 import android.graphics.Bitmap
+import androidx.compose.ui.graphics.asAndroidBitmap
+import java.io.FileInputStream
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
@@ -28,8 +30,13 @@ class NativeFlowTest {
         ui.waitForIdle()
         val file = File(ui.activity.getExternalFilesDir(null), "screenshots/$name.png")
         file.parentFile?.mkdirs()
-        InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()?.let { bitmap ->
-            file.outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+        val bitmap = ui.onRoot().captureToImage().asAndroidBitmap()
+        file.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)) }
+        // Gradle uninstalls the app after instrumentation, removing externalFilesDir.
+        // Preserve screenshots in shell-owned storage before that cleanup.
+        val shell = InstrumentationRegistry.getInstrumentation().uiAutomation
+        shell.executeShellCommand("mkdir -p /data/local/tmp/flip7-screenshots && cp ${file.absolutePath} /data/local/tmp/flip7-screenshots/$name.png").use { fd ->
+            FileInputStream(fd.fileDescriptor).use { it.readBytes() }
         }
     }
     @Test fun cardsCorrectionsRestoreAndBrutalMode() {
