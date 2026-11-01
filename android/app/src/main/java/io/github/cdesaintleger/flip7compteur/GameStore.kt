@@ -29,8 +29,8 @@ object GameJson {
     }
     private fun readHands(a: JSONArray) = (0 until a.length()).map { readHand(a.getJSONObject(it)) }
     fun encode(s: AppState): String {
-        val root = JSONObject().put("version", 1).put("setup", JSONObject().put("names", JSONArray(s.setup.names)).put("target", s.setup.target).put("brutal", s.setup.brutal)).put("selected", s.selected ?: JSONObject.NULL)
-        s.game?.let { g -> root.put("game", JSONObject().put("players", JSONArray(g.players)).put("target", g.target).put("brutal", g.brutal).put("rounds", JSONArray(g.rounds.map(::hands))).put("draft", hands(g.draft)).put("editing", g.editing ?: JSONObject.NULL).put("editDraft", g.editDraft?.let(::hands) ?: JSONObject.NULL)) }
+        val root = JSONObject().put("version", 1).put("setup", JSONObject().put("names", JSONArray(s.setup.names)).put("target", s.setup.target).put("brutal", s.setup.brutal).put("classic", s.setup.classic)).put("selected", s.selected ?: JSONObject.NULL)
+        s.game?.let { g -> root.put("game", JSONObject().put("players", JSONArray(g.players)).put("target", g.target).put("brutal", g.brutal).put("classic", g.classic).put("rounds", JSONArray(g.rounds.map(::hands))).put("draft", hands(g.draft)).put("editing", g.editing ?: JSONObject.NULL).put("editDraft", g.editDraft?.let(::hands) ?: JSONObject.NULL)) }
         return root.toString()
     }
     fun decode(raw: String?): AppState {
@@ -38,7 +38,7 @@ object GameJson {
         val root = JSONObject(raw); require(root.getInt("version") == 1)
         val setup = root.getJSONObject("setup")
         val names = setup.getJSONArray("names").let { a -> (0 until a.length()).map { a.getString(it) } }
-        val config = Setup(names, setup.getString("target"), setup.getBoolean("brutal"))
+        val config = Setup(names, setup.getString("target"), setup.getBoolean("brutal"), setup.optBoolean("classic", false))
         require(names.size in 1..18)
         val game = root.optJSONObject("game")?.let { o ->
             val players = o.getJSONArray("players").let { a -> (0 until a.length()).map { a.getString(it) } }
@@ -49,7 +49,7 @@ object GameJson {
             require(players.size in 1..18 && o.getInt("target") in 1..9999)
             require(draft.size == players.size && rounds.all { it.size == players.size })
             require(editing == null && editDraft == null || (editing != null && editing in rounds.indices && editDraft?.size == players.size))
-            Game(players, o.getInt("target"), o.getBoolean("brutal"), rounds, draft, editing, editDraft)
+            Game(players, o.getInt("target"), o.getBoolean("brutal"), rounds, draft, editing, editDraft, o.optBoolean("classic", false))
         }
         val selected = if (root.isNull("selected")) null else root.getInt("selected").takeIf { game != null && it in game.players.indices }
         return AppState(config, game, selected)

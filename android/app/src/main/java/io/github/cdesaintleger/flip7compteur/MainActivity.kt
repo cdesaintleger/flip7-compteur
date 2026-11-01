@@ -84,7 +84,10 @@ private fun FlipApp(vm: GameViewModel) {
         }) {
             Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp)) {
                 Row(Modifier.fillMaxWidth().height(66.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.width(152.dp).height(58.dp)) {
                     Image(painterResource(R.drawable.brand_web), "Flip 7 · Vengeance · Scores", Modifier.width(152.dp).height(58.dp), contentScale = ContentScale.Fit)
+                    if(state?.game?.classic ?: (state?.setup?.classic == true)) Text("CLASSIQUE · SCORES", Modifier.align(Alignment.BottomEnd).padding(bottom = 6.dp).background(Paper).padding(horizontal = 5.dp, vertical = 2.dp), color = Ink, fontSize = 7.sp, fontWeight = FontWeight.Bold)
+                    }
                     Spacer(Modifier.weight(1f))
                     Box(Modifier.size(33.dp)) {
                     Box(Modifier.offset(2.dp, 3.dp).size(33.dp).background(Ink, RoundedCornerShape(5.dp)))
@@ -110,7 +113,8 @@ private fun FlipApp(vm: GameViewModel) {
     if (help) AlertDialog(onDismissRequest = { help = false }, title = { Text("Touchez. Comptez. Jouez.") }, text = {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item { Text("Sélectionnez les cartes finales de chaque joueur. Aucune sélection = 0 point. Une seule validation termine la manche.") }
-            item { Text("Calcul du livret français : numéros − malus, minimum zéro en mode normal, puis ÷2 arrondi à l’inférieur, et enfin bonus Flip 7 de 15 points.") }
+            item { Text("Classique : numéros de 0 à 12, ×2 sur les numéros seulement, puis Bonus et +15 pour sept numéros. Le zéro laisse les autres points intacts. Sauté = 0.") }
+            item { Text("Vengeance : calcul du livret français : numéros − malus, minimum zéro en mode normal, puis ÷2 arrondi à l’inférieur, et enfin bonus Flip 7 de 15 points.") }
             item { Text("Le zéro impose 0 sans Flip 7. Le 13 porte-bonheur autorise deux 13 qui comptent tous deux pour le bonus. Résolvez les actions autour de la table avant la saisie.") }
             item { Text("Sans pitié : scores négatifs et malus sur un joueur ayant sauté. À sept cartes, choisissez +15 points ou −15 pour un adversaire.") }
             item { Text("La sauvegarde est automatique sur cet appareil. Vous pouvez quitter l’application, tourner l’écran et corriger une manche depuis l’historique. Tout fonctionne sans Internet, dès l’installation.") }
@@ -127,8 +131,8 @@ private fun FlipApp(vm: GameViewModel) {
                     val g = requireNotNull(s.game)
                     when(action) {
                         "undo" -> s.copy(game = g.undo(), selected = null)
-                        "rematch" -> s.copy(game = Game(g.players, g.target, g.brutal), selected = null)
-                        else -> AppState(Setup(g.players, g.target.toString(), g.brutal))
+                        "rematch" -> s.copy(game = Game(g.players, g.target, g.brutal, classic = g.classic), selected = null)
+                        else -> AppState(Setup(g.players, g.target.toString(), g.brutal, g.classic))
                     }
                 }
                 confirm = null
@@ -206,9 +210,16 @@ private fun SetupScreen(setup: Setup, vm: GameViewModel) {
             Panel {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("AUTOUR DE LA TABLE", Modifier.weight(1f), fontSize = 21.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic, letterSpacing = (-.7).sp)
-                    Text("VENGEANCE", Modifier.rotate(-3f).background(Ink, RoundedCornerShape(2.dp)).padding(horizontal = 8.dp, vertical = 7.dp), color = Paper, fontSize = 7.sp, fontWeight = FontWeight.Bold)
+                    Text(if(setup.classic) "CLASSIQUE" else "VENGEANCE", Modifier.rotate(-3f).background(Ink, RoundedCornerShape(2.dp)).padding(horizontal = 8.dp, vertical = 7.dp), color = Paper, fontSize = 7.sp, fontWeight = FontWeight.Bold)
                 }
                 Text("Qui tente sa chance aujourd’hui ?", color = Muted, fontSize = 12.sp, modifier = Modifier.padding(bottom = 10.dp))
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf(true, false).forEach { classic ->
+                        Surface(Modifier.weight(1f).selectable(setup.classic == classic, role = Role.RadioButton, onClick = { vm.update { it.copy(setup = it.setup.copy(classic = classic, brutal = if(classic) false else it.setup.brutal)) } }).testTag(if(classic) "edition-classic" else "edition-vengeance"), color = if(setup.classic == classic) Yellow else Paper, shape = RoundedCornerShape(4.dp), border = BorderStroke(1.dp, Ink)) {
+                            Box(Modifier.heightIn(min = 48.dp).padding(8.dp), contentAlignment = Alignment.Center) { Text(if(classic) "Flip 7 Classique" else "Flip 7 Vengeance", fontSize = 12.sp, fontWeight = FontWeight.Bold) }
+                        }
+                    }
+                }
                 setup.names.forEachIndexed { index, name ->
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Avatar(name, index)
@@ -225,7 +236,7 @@ private fun SetupScreen(setup: Setup, vm: GameViewModel) {
                     Text("Objectif de la partie · points", Modifier.weight(1f), fontSize = 12.sp)
                     WebField(setup.target, "200", Modifier.width(83.dp).testTag("target"), numeric = true) { value -> vm.update { it.copy(setup = it.setup.copy(target = value.filter(Char::isDigit).take(4))) } }
                 }
-                Column(Modifier.fillMaxWidth().toggleable(setup.brutal, role = Role.Checkbox, onValueChange = { value -> vm.update { it.copy(setup = it.setup.copy(brutal = value)) } }).testTag("mode-brutal")) {
+                if(!setup.classic) Column(Modifier.fillMaxWidth().toggleable(setup.brutal, role = Role.Checkbox, onValueChange = { value -> vm.update { it.copy(setup = it.setup.copy(brutal = value)) } }).testTag("mode-brutal")) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(setup.brutal, onCheckedChange = null, modifier = Modifier.size(26.dp))
                         Text("Mode Sans pitié", Modifier.padding(start = 8.dp), fontSize = 13.sp)
@@ -243,14 +254,14 @@ private fun SetupScreen(setup: Setup, vm: GameViewModel) {
 @Composable
 private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Unit) {
     val g = requireNotNull(s.game)
-    val points = Scoring.round(g.hands(), g.brutal)
+    val points = Scoring.round(g.hands(), g.brutal, g.classic)
     val winners = g.winners()
     val ended = winners.size == 1
     LazyColumn(Modifier.widthIn(max = 840.dp).fillMaxWidth().testTag("game-list"), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text(if(g.brutal) "VENGEANCE · SANS PITIÉ" else "VENGEANCE", color = Yellow, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    Text(if(g.classic) "CLASSIQUE" else if(g.brutal) "VENGEANCE · SANS PITIÉ" else "VENGEANCE", color = Yellow, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     Text("Objectif ${g.target} · ${g.rounds.size} manche(s)", color = Paper, fontSize = 12.sp)
                 }
                 TextButton(onClick = { onConfirm("new") }) { Text("Nouvelle partie", color = Paper) }
@@ -270,7 +281,7 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
                     Hint("Touchez un joueur, puis ses cartes. Aucune carte = 0 point.")
                     g.players.forEachIndexed { index, name ->
                     val hand = g.hands()[index]
-                    val detail = Scoring.details(hand, g.brutal)
+                    val detail = Scoring.details(hand, g.brutal, g.classic)
                     Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(5.dp)).background(if(s.selected == index) Color(0xFFFAE49B) else Paper).clickable(role = Role.Button) { vm.update { it.copy(selected = if(it.selected == index) null else index) } }.border(if(s.selected == index) 1.5.dp else 1.dp, if(s.selected == index) Ink else Color(0xFF9993AA), RoundedCornerShape(5.dp)).padding(12.dp).testTag("player-$index"), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Avatar(name, index)
                         Column(Modifier.weight(1f)) {
@@ -313,7 +324,7 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
             val roundIndex = g.rounds.lastIndex - index
             Panel {
                 Text("Manche ${roundIndex + 1}", fontWeight = FontWeight.Bold)
-                Text(Scoring.round(round, g.brutal).mapIndexed { i, score -> "${g.players[i]} : $score" }.joinToString(" · "), fontSize = 13.sp)
+                Text(Scoring.round(round, g.brutal, g.classic).mapIndexed { i, score -> "${g.players[i]} : $score" }.joinToString(" · "), fontSize = 13.sp)
                 TextButton(onClick = { vm.update { it.copy(game = requireNotNull(it.game).edit(roundIndex), selected = null) } }, modifier = Modifier.testTag("edit-$roundIndex")) { Text("Modifier") }
             }
         }
@@ -324,19 +335,19 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
 @Composable
 private fun CardPicker(g: Game, index: Int, vm: GameViewModel) {
     val hand = g.hands()[index]
-    val details = Scoring.details(hand, g.brutal)
+    val details = Scoring.details(hand, g.brutal, g.classic)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text("Cartes Numéro ${details.count}/7", Modifier.weight(1f), fontWeight = FontWeight.Bold, fontSize = 13.sp)
         TextButton(onClick = { vm.changeHand { Hand() } }) { Text("Tout effacer", fontSize = 12.sp) }
     }
     BoxWithConstraints {
         val columns = if(maxWidth < 260.dp) 4 else if(maxWidth >= 500.dp) 7 else 5
-        CardGrid(numberIds, hand, columns, vm)
+        CardGrid(if(g.classic) numberIds.dropLast(1) else numberIds, hand, columns, vm)
     }
-    CardGrid(specialIds, hand, 2, vm, special = true)
-    Hint("Sélectionnez les cartes présentes en fin de manche. Le 7 porte-malheur remplace le 7 ordinaire.")
-    Text("Cartes Malus", fontWeight = FontWeight.Bold, fontSize = 13.sp)
-    BoxWithConstraints { CardGrid(penaltyIds, hand, if(maxWidth >= 500.dp) 6 else 3, vm) }
+    if(!g.classic) CardGrid(specialIds, hand, 2, vm, special = true)
+    Hint(if(g.classic) "Sélectionnez les cartes finales. Le zéro laisse les autres points intacts." else "Sélectionnez les cartes présentes en fin de manche. Le 7 porte-malheur remplace le 7 ordinaire.")
+    Text(if(g.classic) "Cartes Bonus" else "Cartes Malus", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+    BoxWithConstraints { CardGrid(if(g.classic) bonusIds else penaltyIds, hand, if(maxWidth >= 500.dp) 6 else 3, vm) }
     Row(Modifier.fillMaxWidth().toggleable(hand.bust, role = Role.Checkbox, onValueChange = { checked -> vm.changeHand { it.copy(bust = checked, target = null) } }).testTag("bust").padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
         Checkbox(hand.bust, onCheckedChange = null)
         Text("Sauté", Modifier.padding(start = 8.dp).weight(1f), fontWeight = FontWeight.Bold)
@@ -351,7 +362,8 @@ private fun CardPicker(g: Game, index: Int, vm: GameViewModel) {
     }
     Text(when {
         hand.bust -> "Sauté${if(g.brutal) " · malus conservés" else ""} → ${details.points} points"
-        "0" in hand.cards && !details.flip -> "Zéro sans Flip 7 → ${details.points} points"
+        !g.classic && "0" in hand.cards && !details.flip -> "Zéro sans Flip 7 → ${details.points} points"
+        g.classic -> "${details.sum} (numéros)${if("double" in hand.cards) " ×2" else ""} + ${hand.cards.filter { it.startsWith("plus") }.sumOf { it.removePrefix("plus").toInt() }} (bonus)${if(details.flip) " + 15 (Flip 7)" else ""} = ${details.points} points"
         else -> "${details.sum} (numéros) − ${details.penalty} (malus)${if("half" in hand.cards) " → ÷2 arrondi inférieur" else ""}${if(details.bonus > 0) " + 15 (Flip 7)" else ""} = ${details.points} points"
     }, Modifier.semantics { liveRegion = LiveRegionMode.Polite }.testTag("live-calculation"), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
 }
@@ -376,6 +388,10 @@ private fun CardGrid(ids: List<String>, hand: Hand, columns: Int, vm: GameViewMo
                             if(special) Column(Modifier.fillMaxSize().padding(top = 7.dp, bottom = 5.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
                                 Image(painterResource(cardResource(id)), null, Modifier.width(84.dp).height(117.dp), contentScale = ContentScale.Fit)
                                 Text(cardLabel(id), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                            } else if(id in bonusIds) Column(Modifier.fillMaxSize().background(Color(0xFFF8D688)).border(3.dp, Ink, RoundedCornerShape(5.dp)).padding(7.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceEvenly) {
+                                Text("BONUS", fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                Text(if(id == "double") "×2" else "+${id.removePrefix("plus")}", fontSize = 30.sp, fontWeight = FontWeight.Black)
+                                Text("FLIP 7", fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             } else Image(painterResource(cardResource(id)), null, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
                             Text(if(picked) "✓" else "+", Modifier.align(Alignment.BottomEnd).background(if(picked) Ink else Paper, RoundedCornerShape(3.dp)).border(.7.dp, Ink, RoundedCornerShape(3.dp)).padding(horizontal = 3.dp), color = if(picked) Yellow else Ink, fontWeight = FontWeight.Bold, fontSize = 11.sp)
                         }

@@ -30,5 +30,6 @@ fun cardLabel(id: String): String = when(id) {
     "unlucky7" -> "7 porte-malheur"
     "lucky13" -> "13 porte-bonheur"
     "half" -> "Diviser par deux"
-    else -> if(id.startsWith("minus")) "Malus moins ${id.removePrefix("minus")}" else "Carte $id"
+    "double" -> "Multiplier les numéros par deux"
+    else -> if(id.startsWith("plus")) "Bonus plus ${id.removePrefix("plus")}" else if(id.startsWith("minus")) "Malus moins ${id.removePrefix("minus")}" else "Carte $id"
 }

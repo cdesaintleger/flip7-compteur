@@ -6,6 +6,19 @@ import org.junit.Test
 
 class GameTest {
     private fun h(vararg cards: String) = Hand(cards.toSet())
+    @Test fun classicRulesAndPersistence() {
+        assertEquals(12, Scoring.details(h("0", "12"), classic = true).points)
+        assertEquals(44, Scoring.details(h("7", "11", "plus8", "double"), classic = true).points)
+        assertEquals(8, Scoring.details(h("plus2", "plus6", "double"), classic = true).points)
+        assertEquals(67, Scoring.details(h("0", "1", "2", "3", "4", "5", "6", "double", "plus10"), classic = true).points)
+        assertEquals(0, Scoring.details(h("12", "plus10").copy(bust = true), true, true).points)
+        val state = AppState(setup = Setup(classic = true)).start()
+        val scored = state.copy(game = state.game!!.changeHand(0) { h("0", "12", "plus10", "double") }.finish())
+        assertEquals(listOf(34, 0, 0), scored.game!!.totals())
+        assertEquals(scored, GameJson.decode(GameJson.encode(scored)))
+        val legacy = GameJson.encode(AppState()).replace(",\"classic\":false", "")
+        assertFalse(GameJson.decode(legacy).setup.classic)
+    }
     @Test fun frenchOrderAndNegativeRounding() {
         assertEquals(8, Scoring.details(h("10", "11", "minus4", "half")).points)
         assertEquals(0, Scoring.details(h("1", "minus10", "half")).points)
