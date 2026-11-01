@@ -2,7 +2,7 @@ package io.github.cdesaintleger.flip7compteur
 
 import android.graphics.Bitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
-import java.io.FileInputStream
+import android.os.ParcelFileDescriptor
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
@@ -35,9 +35,12 @@ class NativeFlowTest {
         // Gradle uninstalls the app after instrumentation, removing externalFilesDir.
         // Preserve screenshots in shell-owned storage before that cleanup.
         val shell = InstrumentationRegistry.getInstrumentation().uiAutomation
-        shell.executeShellCommand("mkdir -p /data/local/tmp/flip7-screenshots && cp ${file.absolutePath} /data/local/tmp/flip7-screenshots/$name.png").use { fd ->
-            FileInputStream(fd.fileDescriptor).use { it.readBytes() }
-        }
+        fun command(text: String): String = ParcelFileDescriptor.AutoCloseInputStream(shell.executeShellCommand(text)).bufferedReader().use { it.readText().trim() }
+        // executeShellCommand executes a process directly; shell operators are not parsed.
+        command("mkdir -p /data/local/tmp/flip7-screenshots")
+        command("cp ${file.absolutePath} /data/local/tmp/flip7-screenshots/$name.png")
+        val copiedSize = command("stat -c %s /data/local/tmp/flip7-screenshots/$name.png").toLongOrNull()
+        check(copiedSize == file.length()) { "Capture $name non copiée : taille $copiedSize au lieu de ${file.length()}" }
     }
     @Test fun cardsCorrectionsRestoreAndBrutalMode() {
         ui.waitUntil(15_000) { ui.onAllNodesWithTag("start-game").fetchSemanticsNodes().isNotEmpty() }
