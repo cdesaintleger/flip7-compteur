@@ -50,9 +50,13 @@ class NativeFlowTest {
         icon.setBounds(0, 0, 324, 324)
         icon.draw(android.graphics.Canvas(iconBitmap))
         capture("native-launcher", iconBitmap)
+        val vm = ViewModelProvider(ui.activity)[GameViewModel::class.java]
         ui.onNodeWithTag("name-0").performTextReplacement("Alice")
+        ui.waitUntil(15_000) { vm.state.value?.setup?.names?.get(0) == "Alice" }
         ui.onNodeWithTag("name-1").performTextReplacement("Bob")
+        ui.waitUntil(15_000) { vm.state.value?.setup?.names?.get(1) == "Bob" }
         tap("start-game", "setup-list")
+        ui.waitUntil(15_000) { vm.state.value?.game?.players?.take(2) == listOf("Alice", "Bob") }
         tap("player-0")
         for(id in listOf("10", "11", "minus4", "half")) tap("card-$id")
         score(0, 8)

@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.*
@@ -171,9 +172,24 @@ private fun Avatar(name: String, index: Int) {
 }
 @Composable
 private fun WebField(value: String, placeholder: String, modifier: Modifier, numeric: Boolean = false, onChange: (String) -> Unit) {
-    BasicTextField(value, onChange, modifier.height(48.dp).background(Color(0xFFFFF8E3), RoundedCornerShape(4.dp)).border(1.dp, Ink, RoundedCornerShape(4.dp)).padding(horizontal = 12.dp), singleLine = true,
+    // Keep input synchronous for the keyboard while DataStore saves asynchronously.
+    var input by remember { mutableStateOf(value) }
+    var focused by remember { mutableStateOf(false) }
+    var pending by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(value, focused) {
+        if(!focused && (pending == null || value == pending)) {
+            input = value
+            pending = null
+        }
+    }
+    BasicTextField(input, { next ->
+        val valid = if(numeric) next.filter(Char::isDigit).take(4) else next.take(24)
+        input = valid
+        pending = valid
+        onChange(valid)
+    }, modifier.onFocusChanged { focused = it.isFocused }.height(48.dp).background(Color(0xFFFFF8E3), RoundedCornerShape(4.dp)).border(1.dp, Ink, RoundedCornerShape(4.dp)).padding(horizontal = 12.dp), singleLine = true,
         textStyle = TextStyle(color = Ink, fontSize = 16.sp, textAlign = if(numeric) TextAlign.Center else TextAlign.Start), keyboardOptions = KeyboardOptions(keyboardType = if(numeric) KeyboardType.Number else KeyboardType.Text),
-        decorationBox = { inner -> Box(Modifier.fillMaxSize(), contentAlignment = if(numeric) Alignment.Center else Alignment.CenterStart) { if(value.isEmpty()) Text(placeholder, color = Muted, fontSize = 16.sp); inner() } })
+        decorationBox = { inner -> Box(Modifier.fillMaxSize(), contentAlignment = if(numeric) Alignment.Center else Alignment.CenterStart) { if(input.isEmpty()) Text(placeholder, color = Muted, fontSize = 16.sp); inner() } })
 }
 @Composable
 private fun Footer() {
