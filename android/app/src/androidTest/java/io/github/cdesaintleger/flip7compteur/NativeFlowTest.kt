@@ -26,11 +26,11 @@ class NativeFlowTest {
         ui.onNodeWithTag("game-list").performScrollToNode(hasTestTag("player-$index"))
         ui.onNodeWithTag("score-$index", useUnmergedTree = true).assertTextEquals("$value pts")
     }
-    private fun capture(name: String) {
+    private fun capture(name: String, image: Bitmap? = null) {
         ui.waitForIdle()
         val file = File(ui.activity.getExternalFilesDir(null), "screenshots/$name.png")
         file.parentFile?.mkdirs()
-        val bitmap = ui.onRoot().captureToImage().asAndroidBitmap()
+        val bitmap = image ?: ui.onRoot().captureToImage().asAndroidBitmap()
         file.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)) }
         // Gradle uninstalls the app after instrumentation, removing externalFilesDir.
         // Preserve screenshots in shell-owned storage before that cleanup.
@@ -45,6 +45,11 @@ class NativeFlowTest {
     @Test fun cardsCorrectionsRestoreAndBrutalMode() {
         ui.waitUntil(15_000) { ui.onAllNodesWithTag("start-game").fetchSemanticsNodes().isNotEmpty() }
         capture("native-setup")
+        val icon = ui.activity.packageManager.getApplicationIcon(ui.activity.packageName)
+        val iconBitmap = Bitmap.createBitmap(324, 324, Bitmap.Config.ARGB_8888)
+        icon.setBounds(0, 0, 324, 324)
+        icon.draw(android.graphics.Canvas(iconBitmap))
+        capture("native-launcher", iconBitmap)
         ui.onNodeWithTag("name-0").performTextReplacement("Alice")
         ui.onNodeWithTag("name-1").performTextReplacement("Bob")
         tap("start-game", "setup-list")

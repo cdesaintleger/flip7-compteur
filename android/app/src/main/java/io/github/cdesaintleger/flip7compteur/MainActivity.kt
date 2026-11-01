@@ -29,6 +29,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -73,7 +74,7 @@ private fun FlipApp(vm: GameViewModel) {
     var confirm by rememberSaveable { mutableStateOf<String?>(null) }
     LaunchedEffect(message) { message?.let { snackbar.showSnackbar(it); vm.message.value = null } }
     BackHandler(enabled = state?.selected != null) { vm.update { it.copy(selected = null) } }
-    Box(Modifier.fillMaxSize().background(Brush.radialGradient(listOf(Color(0xFF28A7B9), Color(0xFF147B9C), Ink), center = Offset(500f, 180f), radius = 1250f)).safeDrawingPadding()) {
+    Box(Modifier.fillMaxSize().drawWithCache { val gradient = Brush.radialGradient(listOf(Color(0xFF28A7B9), Color(0xFF147B9C), Ink), center = Offset(size.width / 2, size.height * .13f), radius = size.height * .9f); onDrawBehind { drawRect(gradient) } }.safeDrawingPadding()) {
         Column(Modifier.fillMaxSize()) {
             Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp)) {
                 Row(Modifier.fillMaxWidth().height(66.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -186,7 +187,8 @@ private fun SetupScreen(setup: Setup, vm: GameViewModel) {
         item {
             Panel {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Heading("AUTOUR DE LA TABLE")
+                    Text("AUTOUR DE LA TABLE", Modifier.weight(1f), fontSize = 21.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic, letterSpacing = (-.7).sp)
+                    Text("VENGEANCE", Modifier.rotate(-3f).background(Ink, RoundedCornerShape(2.dp)).padding(horizontal = 8.dp, vertical = 7.dp), color = Paper, fontSize = 7.sp, fontWeight = FontWeight.Bold)
                 }
                 Text("Qui tente sa chance aujourd’hui ?", color = Muted, fontSize = 12.sp, modifier = Modifier.padding(bottom = 10.dp))
                 setup.names.forEachIndexed { index, name ->
