@@ -28,3 +28,5 @@ Aucun build ni dépendance de production. Lancer `python3 -m http.server 4175 --
 Le service worker précharge tous les fichiers locaux et les icônes PNG. Aucune ressource externe n’est nécessaire. Incrémenter son nom de cache lors d’une nouvelle publication pour remplacer l’application de manière cohérente.
 
 Règles : https://flip-7.com/flip7-vengeance/ . Compteur indépendant, sans affiliation avec les éditeurs.
+
+Visuels des cartes provenant des ressources officielles de Catch Up Games : https://flip-7.com/flip7-vengeance/ . Ils sont embarqués localement et préchargés pour le mode hors connexion.
