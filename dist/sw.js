@@ -1,5 +1,5 @@
-const CACHE='flip7-v2-cards-1';
-const FILES=['./','./index.html','./style.css','./app.js','./scoring.mjs','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png','./icon-maskable.png','./manifest.webmanifest'];
+const CACHE='flip7-v3-vengeance-theme-1';
+const FILES=['./','./index.html','./style.css','./theme.css','./app.js','./scoring.mjs','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png','./icon-maskable.png','./manifest.webmanifest'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('flip7-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('message',e=>{if(e.data?.type==='CHECK_OFFLINE')e.waitUntil(caches.open(CACHE).then(async c=>{const entries=await Promise.all(FILES.map(f=>c.match(f)));if(entries.every(Boolean))e.source?.postMessage({type:'OFFLINE_READY'})}))});
