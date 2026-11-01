@@ -8,6 +8,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -66,14 +73,20 @@ private fun FlipApp(vm: GameViewModel) {
     var confirm by rememberSaveable { mutableStateOf<String?>(null) }
     LaunchedEffect(message) { message?.let { snackbar.showSnackbar(it); vm.message.value = null } }
     BackHandler(enabled = state?.selected != null) { vm.update { it.copy(selected = null) } }
-    Box(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Teal, Ink))).safeDrawingPadding()) {
+    Box(Modifier.fillMaxSize().background(Brush.radialGradient(listOf(Color(0xFF28A7B9), Color(0xFF147B9C), Ink), center = Offset(500f, 180f), radius = 1250f)).safeDrawingPadding()) {
         Column(Modifier.fillMaxSize()) {
-            Row(Modifier.fillMaxWidth().background(Ink).padding(horizontal = 16.dp, vertical = 5.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text("FLIP 7", color = Yellow, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic, fontSize = 24.sp)
-                    Text("VENGEANCE · LE COMPTEUR", color = Paper, fontSize = 9.sp, letterSpacing = 1.sp)
+            Column(Modifier.fillMaxWidth().padding(horizontal = 18.dp)) {
+                Row(Modifier.fillMaxWidth().height(66.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Image(painterResource(R.drawable.brand_web), "Flip 7 · Vengeance · Scores", Modifier.width(152.dp).height(58.dp), contentScale = ContentScale.Fit)
+                    Spacer(Modifier.weight(1f))
+                    Box(Modifier.size(33.dp)) {
+                    Box(Modifier.offset(2.dp, 3.dp).size(33.dp).background(Ink, RoundedCornerShape(5.dp)))
+                    Box(Modifier.size(33.dp).background(Paper, RoundedCornerShape(5.dp)).border(1.5.dp, Ink, RoundedCornerShape(5.dp)).clickable { help = true }.testTag("help").semantics { contentDescription = "Aide" }, contentAlignment = Alignment.Center) {
+                        Text("?", fontSize = 17.sp, fontWeight = FontWeight.Black, color = Ink)
+                    }
+                    }
                 }
-                TextButton(onClick = { help = true }, modifier = Modifier.testTag("help")) { Text("Aide", color = Paper) }
+                HorizontalDivider(thickness = 2.dp, color = Yellow)
             }
             Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
                 state?.let { s ->
@@ -119,54 +132,91 @@ private fun FlipApp(vm: GameViewModel) {
 
 @Composable
 private fun Panel(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
-    Surface(modifier, color = Paper, contentColor = Ink, shape = RoundedCornerShape(8.dp), border = BorderStroke(1.dp, Ink), shadowElevation = 4.dp) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp), content = content)
+    Box(modifier.padding(end = 5.dp, bottom = 6.dp)) {
+        Box(Modifier.matchParentSize().offset(5.dp, 6.dp).background(Color(0x99171951), RoundedCornerShape(7.dp)))
+        Surface(color = Paper, contentColor = Ink, shape = RoundedCornerShape(7.dp), border = BorderStroke(1.5.dp, Ink)) {
+            Column(Modifier.padding(19.dp), verticalArrangement = Arrangement.spacedBy(12.dp), content = content)
+        }
+        Box(Modifier.padding(horizontal = 14.dp).fillMaxWidth().height(4.dp).border(.5.dp, Ink).background(Brush.horizontalGradient(listOf(Yellow, Yellow, Color(0xFFEF685A), Teal, Yellow))))
     }
 }
 @Composable
-private fun Heading(text: String) { Text(text, fontSize = 21.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic) }
+private fun Heading(text: String) { Text(text, fontSize = 22.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic, letterSpacing = (-.7).sp) }
 @Composable
-private fun Hint(text: String) { Text(text, fontSize = 12.sp, color = Muted) }
+private fun Hint(text: String) { Text(text, fontSize = 10.sp, lineHeight = 16.sp, color = Muted) }
 @Composable
 private fun Primary(text: String, tag: String, onClick: () -> Unit) {
-    Button(onClick, Modifier.fillMaxWidth().heightIn(min = 50.dp).testTag(tag), shape = RoundedCornerShape(5.dp), border = BorderStroke(1.dp, Ink), colors = ButtonDefaults.buttonColors(containerColor = Yellow, contentColor = Ink)) {
-        Text(text, fontWeight = FontWeight.Bold)
+    Box(Modifier.fillMaxWidth().padding(end = 3.dp, bottom = 4.dp)) {
+        Box(Modifier.matchParentSize().offset(3.dp, 4.dp).background(Ink, RoundedCornerShape(5.dp)))
+        Row(Modifier.fillMaxWidth().heightIn(min = 55.dp).background(Yellow, RoundedCornerShape(5.dp)).border(1.5.dp, Ink, RoundedCornerShape(5.dp)).clickable(role = Role.Button, onClick = onClick).testTag(tag).padding(horizontal = 22.dp, vertical = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(text, Modifier.weight(1f), fontWeight = FontWeight.Black, color = Ink)
+            Text("↗", color = Ink, fontSize = 20.sp)
+        }
     }
 }
 @Composable
 private fun Avatar(name: String, index: Int) {
-    Box(Modifier.size(36.dp).clip(RoundedCornerShape(5.dp)).background(playerColors[index % playerColors.size]), contentAlignment = Alignment.Center) {
-        Text(name.trim().take(1).uppercase().ifEmpty { (index + 1).toString() }, fontWeight = FontWeight.Black, color = Ink)
+    Box(Modifier.size(38.dp).rotate(-4f)) {
+        Box(Modifier.matchParentSize().offset(2.dp, 2.dp).background(Ink, RoundedCornerShape(5.dp)))
+        Box(Modifier.fillMaxSize().background(playerColors[index % playerColors.size], RoundedCornerShape(5.dp)).border(1.dp, Ink, RoundedCornerShape(5.dp)), contentAlignment = Alignment.Center) {
+            Text(name.trim().take(1).uppercase().ifEmpty { (index + 1).toString() }, fontWeight = FontWeight.Black, color = Ink)
+        }
     }
 }
-
+@Composable
+private fun WebField(value: String, placeholder: String, modifier: Modifier, numeric: Boolean = false, onChange: (String) -> Unit) {
+    BasicTextField(value, onChange, modifier.height(48.dp).background(Color(0xFFFFF8E3), RoundedCornerShape(4.dp)).border(1.dp, Ink, RoundedCornerShape(4.dp)).padding(horizontal = 12.dp), singleLine = true,
+        textStyle = TextStyle(color = Ink, fontSize = 16.sp), keyboardOptions = KeyboardOptions(keyboardType = if(numeric) KeyboardType.Number else KeyboardType.Text),
+        decorationBox = { inner -> Box(Modifier.fillMaxSize(), contentAlignment = if(numeric) Alignment.Center else Alignment.CenterStart) { if(value.isEmpty()) Text(placeholder, color = Muted, fontSize = 16.sp); inner() } })
+}
+@Composable
+private fun Footer() {
+    Column(Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 12.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
+        HorizontalDivider(color = Color(0xFF81C1C1), thickness = .5.dp)
+        Text("●  Sauvegardé sur cet appareil · Hors connexion", color = Paper, fontSize = 10.sp)
+    }
+}
 @Composable
 private fun SetupScreen(setup: Setup, vm: GameViewModel) {
-    LazyColumn(Modifier.widthIn(max = 720.dp).fillMaxWidth().imePadding().testTag("setup-list"), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        item { Text("Nouvelle partie", color = Paper, fontWeight = FontWeight.Bold, fontSize = 25.sp) }
+    LazyColumn(Modifier.widthIn(max = 660.dp).fillMaxWidth().imePadding().testTag("setup-list"), contentPadding = PaddingValues(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        item { Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text("Nouvelle partie", color = Paper, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic, fontSize = 26.sp)
+            Text("Installez-vous, on compte les points.", color = Paper, fontSize = 12.sp)
+        } }
         item {
             Panel {
-                Heading("AUTOUR DE LA TABLE")
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Heading("AUTOUR DE LA TABLE")
+                }
+                Text("Qui tente sa chance aujourd’hui ?", color = Muted, fontSize = 12.sp, modifier = Modifier.padding(bottom = 10.dp))
                 setup.names.forEachIndexed { index, name ->
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Avatar(name, index)
-                        OutlinedTextField(name, { value -> vm.update { s -> s.copy(setup = s.setup.copy(names = s.setup.names.mapIndexed { i, n -> if(i == index) value.take(24) else n })) } }, Modifier.weight(1f).testTag("name-$index"), label = { Text("Joueur ${index + 1}") }, singleLine = true)
-                        TextButton(onClick = { vm.update { s -> s.copy(setup = s.setup.copy(names = s.setup.names.filterIndexed { i, _ -> i != index })) } }, enabled = setup.names.size > 1, modifier = Modifier.sizeIn(minWidth = 48.dp).semantics { contentDescription = "Retirer le joueur ${index + 1}" }) { Text("×", fontSize = 22.sp) }
+                        WebField(name, "Joueur ${index + 1}", Modifier.weight(1f).testTag("name-$index")) { value -> vm.update { s -> s.copy(setup = s.setup.copy(names = s.setup.names.mapIndexed { i, n -> if(i == index) value.take(24) else n })) } }
+                        Box(Modifier.size(28.dp, 48.dp).clickable(enabled = setup.names.size > 1, role = Role.Button) { vm.update { s -> s.copy(setup = s.setup.copy(names = s.setup.names.filterIndexed { i, _ -> i != index })) } }.semantics { contentDescription = "Retirer le joueur ${index + 1}" }, contentAlignment = Alignment.Center) { Text("×", fontSize = 22.sp) }
                     }
                 }
-                OutlinedButton(onClick = { vm.update { s -> require(s.setup.names.size < 18); s.copy(setup = s.setup.copy(names = s.setup.names + "")) } }, enabled = setup.names.size < 18, modifier = Modifier.fillMaxWidth()) { Text("+ Ajouter un joueur") }
-                OutlinedTextField(setup.target, { value -> vm.update { it.copy(setup = it.setup.copy(target = value.filter(Char::isDigit).take(4))) } }, Modifier.fillMaxWidth().testTag("target"), label = { Text("Objectif · points") }, singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
-                Row(Modifier.fillMaxWidth().toggleable(setup.brutal, role = Role.Checkbox, onValueChange = { value -> vm.update { it.copy(setup = it.setup.copy(brutal = value)) } }).testTag("mode-brutal").padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Checkbox(setup.brutal, onCheckedChange = null)
-                    Column(Modifier.padding(start = 8.dp)) {
-                        Text("Mode Sans pitié", fontWeight = FontWeight.Bold)
-                        Hint("Scores négatifs, malus après avoir sauté et vengeance −15.")
+                Box(Modifier.fillMaxWidth().height(46.dp).background(Color(0xFFF7E5AA), RoundedCornerShape(4.dp)).clickable(enabled = setup.names.size < 18, role = Role.Button) { vm.update { s -> s.copy(setup = s.setup.copy(names = s.setup.names + "")) } }, contentAlignment = Alignment.Center) {
+                    Canvas(Modifier.matchParentSize()) { drawRoundRect(Ink, cornerRadius = androidx.compose.ui.geometry.CornerRadius(4.dp.toPx()), style = androidx.compose.ui.graphics.drawscope.Stroke(width = 1.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(3.dp.toPx(), 2.dp.toPx())))) }
+                    Text("+ Ajouter un joueur", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                }
+                HorizontalDivider(Modifier.padding(top = 12.dp, bottom = 8.dp), color = Color(0xFFB7AB85), thickness = .5.dp)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("Objectif de la partie · points", Modifier.weight(1f), fontSize = 12.sp)
+                    WebField(setup.target, "200", Modifier.width(83.dp).testTag("target"), numeric = true) { value -> vm.update { it.copy(setup = it.setup.copy(target = value.filter(Char::isDigit).take(4))) } }
+                }
+                Column(Modifier.fillMaxWidth().toggleable(setup.brutal, role = Role.Checkbox, onValueChange = { value -> vm.update { it.copy(setup = it.setup.copy(brutal = value)) } }).testTag("mode-brutal")) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(setup.brutal, onCheckedChange = null, modifier = Modifier.size(26.dp))
+                        Text("Mode Sans pitié", Modifier.padding(start = 8.dp), fontSize = 13.sp)
                     }
+                    Text("Scores négatifs, malus après avoir sauté. Un Flip 7 donne +15 ou retire 15 à un adversaire.", Modifier.padding(start = 26.dp, top = 8.dp, bottom = 10.dp), color = Muted, fontSize = 10.sp, lineHeight = 18.sp)
                 }
                 Primary("C’est parti", "start-game") { vm.update(AppState::start) }
-                Hint("Sauvegarde locale automatique · Hors connexion dès l’installation")
+                Hint("Un appareil pour toute la table. Sauvegarde automatique et jeu hors connexion.")
             }
         }
+        item { Footer() }
     }
 }
 
@@ -198,13 +248,10 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
                 Panel {
                     Heading(if(g.editing == null) "MANCHE ${g.rounds.size + 1}" else "MODIFIER LA MANCHE ${g.editing + 1}")
                     Hint("Touchez un joueur, puis ses cartes. Aucune carte = 0 point.")
-                }
-            }
-            itemsIndexed(g.players, key = { index, _ -> "player-$index" }) { index, name ->
-                Panel {
+                    g.players.forEachIndexed { index, name ->
                     val hand = g.hands()[index]
                     val detail = Scoring.details(hand, g.brutal)
-                    Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(5.dp)).background(if(s.selected == index) Color(0xFFFAE49B) else Paper).clickable(role = Role.Button) { vm.update { it.copy(selected = if(it.selected == index) null else index) } }.padding(9.dp).testTag("player-$index"), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(5.dp)).background(if(s.selected == index) Color(0xFFFAE49B) else Paper).clickable(role = Role.Button) { vm.update { it.copy(selected = if(it.selected == index) null else index) } }.border(if(s.selected == index) 1.5.dp else 1.dp, if(s.selected == index) Ink else Color(0xFF9993AA), RoundedCornerShape(5.dp)).padding(12.dp).testTag("player-$index"), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Avatar(name, index)
                         Column(Modifier.weight(1f)) {
                             Text(name, fontWeight = FontWeight.Bold)
@@ -213,11 +260,10 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
                         Text("${points[index]} pts", Modifier.testTag("score-$index"), fontWeight = FontWeight.Black, fontSize = 23.sp)
                         Text(if(s.selected == index) "−" else "+")
                     }
-                    if(s.selected == index) CardPicker(g, index, vm)
-                }
-            }
-            item {
-                Panel {
+                    if(s.selected == index) Surface(color = Color(0xFFF4E6BC), shape = RoundedCornerShape(5.dp), border = BorderStroke(1.dp, Ink)) {
+                        Column(Modifier.padding(11.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) { CardPicker(g, index, vm) }
+                    }
+                    }
                     Primary(if(g.editing == null) "Terminer la manche" else "Enregistrer la correction", "finish-round") { vm.update { it.copy(game = requireNotNull(it.game).finish(), selected = null) } }
                     if(g.editing != null) TextButton(onClick = { vm.update { it.copy(game = requireNotNull(it.game).cancelEdit(), selected = null) } }, modifier = Modifier.testTag("cancel-edit")) { Text("Annuler la correction") }
                     Hint("Pas de validation individuelle. Les sélections sont sauvegardées au fur et à mesure.")
@@ -251,7 +297,7 @@ private fun GameScreen(s: AppState, vm: GameViewModel, onConfirm: (String) -> Un
                 TextButton(onClick = { vm.update { it.copy(game = requireNotNull(it.game).edit(roundIndex), selected = null) } }, modifier = Modifier.testTag("edit-$roundIndex")) { Text("Modifier") }
             }
         }
-        item { Text("Sauvegardé sur cet appareil · Hors connexion", color = Paper, fontSize = 11.sp, modifier = Modifier.padding(vertical = 8.dp)) }
+        item { Footer() }
     }
 }
 

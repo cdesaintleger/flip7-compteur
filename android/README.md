@@ -64,3 +64,7 @@ app/src/androidTest/ Parcours Android instrumenté et captures
 Le bundle généré n’est **pas encore prêt à être envoyé au Play Store** : il reste à configurer la signature de publication et Play App Signing avec la clé de ton compte, puis la fiche et les déclarations Play Console. Ne pas utiliser l’APK de débogage pour la publication. Les clés et mots de passe ne doivent pas être ajoutés au dépôt.
 
 Le nom et les illustrations du jeu restent la propriété de leurs ayants droit. L’autorisation de les distribuer dans une application Play Store doit être confirmée avant publication. La provenance des illustrations est documentée dans le README principal.
+
+### Interface 0.1.1
+
+L’interface native reprend les champs compacts, avatars, panneaux crème, boutons et proportions de la webapp. Le logo de l’en-tête est exporté depuis sa composition HTML/CSS, avec transparence et marge. L’icône adaptative Android réserve une marge de 20 % pour conserver le visuel entier dans les masques du lanceur.
