@@ -75,7 +75,7 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader -no-snapshot -noaudio -no-boot-anim -camera-back none -feature -Vulkan
           working-directory: android
-          script: ./gradlew --no-daemon connectedDebugAndroidTest; native_test_result=$?; mkdir -p ../outputs; adb pull /data/local/tmp/flip7-screenshots ../outputs/android-screenshots || true; exit "$native_test_result"
+          script: bash check-device.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -84,3 +84,5 @@ jobs:
             android/app/build/reports/androidTests/
             android/app/build/outputs/androidTest-results/
             outputs/android-screenshots/
+            outputs/device-logcat.txt
+            outputs/host-kernel.log
