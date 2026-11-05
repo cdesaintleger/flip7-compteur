@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontStyle
@@ -73,6 +74,8 @@ private fun FlipApp(vm: GameViewModel) {
     val message by vm.message.collectAsStateWithLifecycle()
     val snackbar = remember { SnackbarHostState() }
     var help by rememberSaveable { mutableStateOf(false) }
+    var privacy by rememberSaveable { mutableStateOf(false) }
+    val uriHandler = LocalUriHandler.current
     var confirm by rememberSaveable { mutableStateOf<String?>(null) }
     LaunchedEffect(message) { message?.let { snackbar.showSnackbar(it); vm.message.value = null } }
     BackHandler(enabled = state?.selected != null) { vm.update { it.copy(selected = null) } }
@@ -118,7 +121,19 @@ private fun FlipApp(vm: GameViewModel) {
             item { Text("La sauvegarde est automatique sur cet appareil. Vous pouvez quitter l’application, tourner l’écran et corriger une manche depuis l’historique. Tout fonctionne sans Internet, dès l’installation.") }
             item { Text("Compteur indépendant, sans affiliation avec les éditeurs. Les illustrations des cartes appartiennent à leurs ayants droit.", fontSize = 12.sp) }
         }
-    }, confirmButton = { TextButton(onClick = { help = false }) { Text("Compris") } })
+    }, dismissButton = { TextButton(onClick = { help = false; privacy = true }) { Text("Confidentialité") } }, confirmButton = { TextButton(onClick = { help = false }) { Text("Compris") } })
+    if (privacy) AlertDialog(onDismissRequest = { privacy = false }, title = { Text("Confidentialité") }, text = {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            item { Text("Flip 7 · Le compteur Android — Christophe de saint léger. Mise à jour : 5 novembre 2026.") }
+            item { Text("Les noms ou pseudonymes, paramètres, cartes, scores et historiques restent dans le stockage interne de votre appareil pour reprendre la partie. Vous pouvez utiliser des pseudonymes.") }
+            item { Text("L’application ne transmet pas ces informations à l’éditeur ni à un tiers. Aucune permission réseau, compte, publicité, traceur ou télémétrie. La sauvegarde Android dans le cloud est désactivée.") }
+            item { Text("Démarrer une nouvelle partie remplace la partie enregistrée. Effacer le stockage dans les paramètres Android ou désinstaller l’application supprime les données locales.") }
+            item { Text("Le compteur peut être utilisé en famille dès 6 ans. Il ne collecte ni ne transmet de données personnelles à l’éditeur, quel que soit l’âge du joueur.") }
+            item { Text("Google Play traite les installations et diagnostics selon ses propres règles et vos paramètres Google. L’application ne lui envoie pas les parties.") }
+            item { Text("Si vous contactez l’assistance, l’adresse e-mail et les informations envoyées servent à répondre à votre demande. N’envoyez pas de données personnelles d’un enfant ni d’informations sensibles.") }
+            item { Text("Contact : christophe@lindev.fr") }
+        }
+    }, dismissButton = { TextButton(onClick = { uriHandler.openUri("https://cdesaintleger.github.io/flip7-compteur/privacy.html") }) { Text("Voir en ligne") } }, confirmButton = { TextButton(onClick = { privacy = false }) { Text("Fermer") } })
     confirm?.let { action ->
         val title = when(action) { "undo" -> "Annuler la dernière manche ?"; "rematch" -> "Prêts pour la revanche ?"; else -> "Nouvelle partie ?" }
         AlertDialog(onDismissRequest = { confirm = null }, title = { Text(title) }, text = {
